@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  agent:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: ucphhpc/gocd-agent-docker:${BUILD_TAG}
+    env_file:
+      - .env

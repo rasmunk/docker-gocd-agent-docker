@@ -10,3 +10,5 @@ if [ "$DOCKER_GID" ]; then
     groupadd -g $DOCKER_GID hostdocker
     usermod -a -G hostdocker go
 fi
+
+gosu go ./docker-entrypoint.sh

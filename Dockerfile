@@ -9,7 +9,9 @@ RUN apt update && apt install -y \
     ca-certificates \
     curl \
     gnupg \
-    lsb-release
+    lsb-release \
+    gosu \
+    && rm -rf /var/lib/apt/lists/*;
 
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
@@ -19,15 +21,18 @@ RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/d
 RUN apt update && apt install -y \
     docker-ce \
     docker-ce-cli \
-    containerd.io
+    containerd.io \
+    && rm -rf /var/lib/apt/lists/*;
 
-RUN apt install -y \
-    make
+RUN apt update && apt install -y \
+    make \
+    && rm -rf /var/lib/apt/lists/*;
 
 ADD pre-docker-entrypoint.sh /pre-docker-entrypoint.sh
 RUN chown -R root:root /pre-docker-entrypoint.sh \
     && chmod +x /pre-docker-entrypoint.sh
 
+USER root
 # IMPORTANT, since the /pre-docker-entrypoint.sh script is run as root
 # Ensure that it launches the /docker-entrypoint.sh script as the go user
 # before it exists
