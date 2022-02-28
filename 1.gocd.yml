@@ -3,7 +3,7 @@ environments:
     pipelines:
       - gocd-agent
 pipelines:
-  gocd-server:
+  gocd-agent:
     group: gocd_images
     locking: off
     materials:
