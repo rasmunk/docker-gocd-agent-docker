@@ -11,6 +11,7 @@ RUN apt update && apt install -y \
     gnupg \
     lsb-release \
     gosu \
+    python3-pip \
     && rm -rf /var/lib/apt/lists/*;
 
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
