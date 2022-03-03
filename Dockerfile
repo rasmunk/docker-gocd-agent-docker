@@ -27,11 +27,14 @@ RUN apt update && apt install -y \
 
 RUN apt update && apt install -y \
     make \
+    libffi-dev \
     && rm -rf /var/lib/apt/lists/*;
 
 ADD pre-docker-entrypoint.sh /pre-docker-entrypoint.sh
 RUN chown -R root:root /pre-docker-entrypoint.sh \
     && chmod +x /pre-docker-entrypoint.sh
+
+RUN pip3 install docker-compose
 
 USER root
 # IMPORTANT, since the /pre-docker-entrypoint.sh script is run as root
