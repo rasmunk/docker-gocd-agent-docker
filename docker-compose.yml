@@ -5,6 +5,6 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    image: ucphhpc/gocd-agent-docker:${BUILD_TAG}
+    image: ucphhpc/gocd-agent-docker:${DEFAULT_TAG}
     env_file:
       - .env

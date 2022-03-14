@@ -1,6 +1,6 @@
 OWNER=ucphhpc
 IMAGE=gocd-agent-docker
-BUILD_TAG=edge
+DEFAULT_TAG=edge
 ARGS=
 
 .PHONY: build
@@ -11,7 +11,7 @@ build:
 	docker-compose build $(ARGS)
 
 clean:
-	docker rmi -f $(OWNER)/$(IMAGE):$(BUILD_TAG) $(ARGS)
+	docker rmi -f $(OWNER)/$(IMAGE):$(DEFAULT_TAG) $(ARGS)
 
 push:
-	docker push ${OWNER}/${IMAGE}:${BUILD_TAG} $(ARGS)
+	docker push $(OWNER)/$(IMAGE):$(DEFAULT_TAG) $(ARGS)
