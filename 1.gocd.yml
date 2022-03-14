@@ -1,5 +1,7 @@
 environments:
   gocd_images:
+    environments:
+      GIT_USER: "{{SECRET:[github][username]}}"
     pipelines:
       - gocd-agent
 pipelines:
@@ -7,10 +9,18 @@ pipelines:
     group: gocd_images
     locking: off
     materials:
-      gocdserver_git:  # this is the name of material
+      gocd_agent_git:  # this is the name of material
         # says about type of material and url at once
         git: https://github.com/rasmunk/docker-gocd-agent-docker.git
         branch: main
+        destination: gocd-agent
+      publish_docker_git:  # this is the name of material
+        # says about type of material and url at once
+        git: https://github.com/rasmunk/publish-docker-scripts.git
+        branch: main
+        username: ${GIT_USER}
+        password: "{{SECRET:[github][access_token]}}"
+        destination: publish-docker-scripts
     parameters:
       IMAGE: docker-gocd-agent-docker
       COMMIT_TAG: "${GO_REVISION_GOCDSERVER_GIT}"
