@@ -24,8 +24,8 @@ pipelines:
         password: "{{SECRET:[github][access_token]}}"
         destination: publish-docker-scripts
     parameters:
-      ARGS: ''
       IMAGE: docker-gocd-agent-docker
+      ARGS: ''
       COMMIT_TAG: "${GO_REVISION_GOCDSERVER_GIT}"
       DEFAULT_TAG: latest
       SRC_DIRECTORY: gocd-agent
