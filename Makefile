@@ -5,7 +5,7 @@ ARGS=
 
 .PHONY: build
 
-all: clean init build test
+all: clean init build
 
 # Link to the original defaults.env if none other is setup
 init:
