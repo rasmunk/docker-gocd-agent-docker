@@ -2,9 +2,11 @@ version: '3.7'
 
 services:
   agent:
+    image: ucphhpc/gocd-agent-docker:$TAG
     build:
       context: ./
       dockerfile: Dockerfile
-    image: ucphhpc/gocd-agent-docker:${DEFAULT_TAG}
+      args:
+        TAG: ${TAG}
     env_file:
       - .env

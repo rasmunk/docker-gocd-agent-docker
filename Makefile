@@ -1,6 +1,6 @@
 OWNER=ucphhpc
 IMAGE=gocd-agent-docker
-DEFAULT_TAG=edge
+TAG=edge
 ARGS=
 
 .PHONY: build
@@ -14,13 +14,13 @@ ifeq (,$(wildcard ./.env))
 endif
 
 build:
-	docker-compose build $(ARGS)
+	docker-compose build --build-arg TAG=$(TAG) $(ARGS)
 
 clean:
-	docker rmi -f $(OWNER)/$(IMAGE):$(DEFAULT_TAG) $(ARGS)
+	docker rmi -f $(OWNER)/$(IMAGE):$(TAG) $(ARGS)
 
 push:
-	docker push $(OWNER)/$(IMAGE):$(DEFAULT_TAG) $(ARGS)
+	docker push $(OWNER)/$(IMAGE):$(TAG) $(ARGS)
 
 test:
 # TODO, implement tests :)
