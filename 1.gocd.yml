@@ -28,7 +28,7 @@ pipelines:
     parameters:
       IMAGE: docker-gocd-agent-docker
       ARGS: ''
-      COMMIT_TAG: "${GO_REVISION_GOCDSERVER_GIT}"
+      COMMIT_TAG: GO_REVISION_GOCDSERVER_GIT
       DEFAULT_TAG: latest
       SRC_DIRECTORY: gocd-agent
       TEST_DIRECTORY: gocd-agent
