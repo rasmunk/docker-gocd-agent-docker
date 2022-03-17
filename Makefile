@@ -1,7 +1,9 @@
 OWNER=ucphhpc
 IMAGE=gocd-agent-docker
 TAG=edge
-ARGS=
+# Enable that the builder should use buildkit
+# https://docs.docker.com/develop/develop-images/build_enhancements/
+DOCKER_BUILDKIT=1
 
 .PHONY: build
 
@@ -14,7 +16,7 @@ ifeq (,$(wildcard ./.env))
 endif
 
 build:
-	docker-compose build --build-arg TAG=$(TAG) $(ARGS)
+	docker-compose build $(ARGS)
 
 clean:
 	docker rmi -f $(OWNER)/$(IMAGE):$(TAG) $(ARGS)
