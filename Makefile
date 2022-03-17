@@ -5,7 +5,7 @@ TAG=edge
 # https://docs.docker.com/develop/develop-images/build_enhancements/
 DOCKER_BUILDKIT=1
 
-.PHONY: build
+.PHONY: all init build push
 
 all: clean init build test 
 
