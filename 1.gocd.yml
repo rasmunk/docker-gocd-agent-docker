@@ -3,18 +3,18 @@ environments:
     environments:
       GIT_USER: "{{SECRET:[github][username]}}"
     pipelines:
-      - gocd-agent
+      - gocd-agent-docker
 pipelines:
-  gocd-agent:
+  gocd-agent-docker:
     group: gocd_images
     locking: off
     materials:
-      gocd_agent_git:  # this is the name of material
+      gocd_agent_docker_git:  # this is the name of material
         # says about type of material and url at once
-        name: gocd-agent
+        name: gocd-agent-docker
         git: https://github.com/rasmunk/docker-gocd-agent-docker.git
         branch: main
-        destination: gocd-agent
+        destination: gocd-agent-docker
       publish_docker_git:  # this is the name of material
         # says about type of material and url at once
         name: publish-docker-scripts
@@ -28,7 +28,7 @@ pipelines:
       ARGS: ''
       COMMIT_TAG: GO_REVISION_GOCD_AGENT_GIT
       DEFAULT_TAG: latest
-      SRC_DIRECTORY: gocd-agent
-      TEST_DIRECTORY: gocd-agent
+      SRC_DIRECTORY: gocd-agent-docker
+      TEST_DIRECTORY: gocd-agent-docker
       PUSH_DIRECTORY: publish-docker-scripts
     template: docker_image
