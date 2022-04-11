@@ -12,6 +12,8 @@ RUN apt update && apt install -y \
     lsb-release \
     gosu \
     python3-pip \
+    python3-dev \
+    python3-venv \
     rsync \
     && rm -rf /var/lib/apt/lists/*;
 
