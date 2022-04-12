@@ -1,12 +1,12 @@
 environments:
-  gocd_images:
+  docker_image:
     environments:
       GIT_USER: "{{SECRET:[github][username]}}"
     pipelines:
       - gocd-agent-docker
 pipelines:
   gocd-agent-docker:
-    group: gocd_images
+    group: docker_image
     locking: off
     materials:
       gocd_agent_docker_git:  # this is the name of material
