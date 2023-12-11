@@ -32,7 +32,7 @@ pipelines:
       ARGS: ''
       COMMIT_TAG: GO_REVISION_GOCD_AGENT_DOCKER_GIT
       DEFAULT_TAG: latest
-      EXTRA_TAG: v23.3.0
+      EXTRA_TAG: v23.4.0
       SRC_DIRECTORY: gocd-agent-docker
       TEST_DIRECTORY: gocd-agent-docker
       PUSH_DIRECTORY: publish-docker-scripts
