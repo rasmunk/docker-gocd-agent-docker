@@ -5,11 +5,20 @@ IMAGE=$(PACKAGE_NAME)
 # Enable that the builder should use buildkit
 # https://docs.docker.com/develop/develop-images/build_enhancements/
 DOCKER_BUILDKIT=1
+# NOTE: dynamic lookup with docker as default and fallback to podman
+DOCKER=$(shell which docker || which podman)
+# if docker compose plugin is not available, try old docker-compose/podman-compose
+ifeq (, $(shell ${DOCKER} help|grep compose))
+	DOCKER_COMPOSE=$(shell which docker-compose || which podman-compose)
+else
+	DOCKER_COMPOSE=docker compose
+endif
+$(echo ${DOCKER_COMPOSE} >/dev/null)
 TAG=edge
 ARGS=
 
 .PHONY: all init dockerbuild dockerclean dockerpush clean dist distclean maintainer-clean
-.PHONY: install uninstall installcheck check
+.PHONY: install uninstall installtest test
 
 all: init dockerbuild
 
@@ -21,17 +30,17 @@ endif
 endif
 
 dockerbuild:
-	docker-compose build ${ARGS}
+	${DOCKER_COMPOSE} build ${ARGS}
 
 dockerclean:
-	docker rmi -f $(OWNER)/$(IMAGE):$(TAG)
+	${DOCKER} rmi -f ${OWNER}/${IMAGE}:${TAG}
 
 dockerpush:
-	docker push $(OWNER)/$(IMAGE):$(TAG)
+	${DOCKER} push ${OWNER}/${IMAGE}:${TAG}
 
 clean:
-	$(MAKE) dockerclean
-	$(MAKE) distclean
+	${MAKE} dockerclean
+	${MAKE} distclean
 	rm -fr .env
 	rm -fr .pytest_cache
 	rm -fr tests/__pycache__
@@ -45,22 +54,22 @@ distclean:
 maintainer-clean:
 	@echo 'This command is intended for maintainers to use; it'
 	@echo 'deletes files that may need special tools to rebuild.'
-	$(MAKE) distclean
+	${MAKE} distclean
 
 install-dep:
 ### PLACEHOLDER ###
 
 install:
-	$(MAKE) install-dep
+	${MAKE} install-dep
 
 uninstall:
 ### PLACEHOLDER ###
 
-uninstallcheck:
+uninstalltest:
 ### PLACEHOLDER ###
 
-installcheck:
+installtest:
 ### PLACEHOLDER ###
 
-check:
+test:
 ### PLACEHOLDER ###
