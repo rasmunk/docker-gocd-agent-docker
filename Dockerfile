@@ -16,6 +16,12 @@ RUN apt update && apt install -y \
     rsync \
     && rm -rf /var/lib/apt/lists/*;
 
+WORKDIR /usr/bin
+# Ensure that python base links are present
+RUN ln -s python3 python
+
+WORKDIR /
+
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
 RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
