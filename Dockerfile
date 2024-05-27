@@ -36,8 +36,6 @@ ADD pre-docker-entrypoint.sh /pre-docker-entrypoint.sh
 RUN chown -R root:root /pre-docker-entrypoint.sh \
     && chmod +x /pre-docker-entrypoint.sh
 
-RUN pip3 install docker-compose
-
 USER root
 # IMPORTANT, since the /pre-docker-entrypoint.sh script is run as root
 # Ensure that it launches the /docker-entrypoint.sh script as the go user
