@@ -59,8 +59,7 @@ maintainer-clean:
 install-dep:
 ### PLACEHOLDER ###
 
-install:
-	${MAKE} install-dep
+install: install-dep
 
 uninstall:
 ### PLACEHOLDER ###
