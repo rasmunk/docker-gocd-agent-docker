@@ -4,6 +4,8 @@ LABEL MAINTAINER="Rasmus Munk <rasmus.munk@nbi.ku.dk>"
 USER root
 
 # Docker requirements
+# Also install python3 and python3-venv such that packages that leverage
+# python as part of their build process can be built
 RUN apt update && apt install -y \
     ca-certificates \
     curl \
@@ -11,6 +13,8 @@ RUN apt update && apt install -y \
     lsb-release \
     gosu \
     rsync \
+    python3 \
+    python3-venv \
     && rm -rf /var/lib/apt/lists/*;
 
 WORKDIR /usr/bin
