@@ -11,17 +11,16 @@ DOCKER=$(shell which docker || which podman)
 ifeq (, $(shell ${DOCKER} help|grep compose))
 	DOCKER_COMPOSE=$(shell which docker-compose || which podman-compose)
 else
-	DOCKER_COMPOSE=docker compose
+	DOCKER_COMPOSE=${DOCKER} compose
 endif
 $(echo ${DOCKER_COMPOSE} >/dev/null)
 TAG=edge
 ARGS=
 
-.PHONY: all init dockerbuild dockerclean dockerpush clean dist distclean maintainer-clean
-.PHONY: install uninstall installtest test
-
+.PHONY: all
 all: init dockerbuild
 
+.PHONY: init
 init:
 ifeq ($(shell test -e defaults.env && echo yes), yes)
 ifneq ($(shell test -e .env && echo yes), yes)
@@ -29,46 +28,56 @@ ifneq ($(shell test -e .env && echo yes), yes)
 endif
 endif
 
+.PHONY: dockerbuild
 dockerbuild:
 	${DOCKER_COMPOSE} build ${ARGS}
 
+.PHONY: dockerclean
 dockerclean:
 	${DOCKER} rmi -f ${OWNER}/${IMAGE}:${TAG}
 
+.PHONY: dockerpush
 dockerpush:
 	${DOCKER} push ${OWNER}/${IMAGE}:${TAG}
 
-clean:
-	${MAKE} dockerclean
-	${MAKE} distclean
+.PHONY: clean
+clean: distclean dockerclean
 	rm -fr .env
 	rm -fr .pytest_cache
 	rm -fr tests/__pycache__
 
+.PHONY: dist
 dist:
 ### PLACEHOLDER ###
 
+.PHONY: distclean
 distclean:
 ### PLACEHOLDER ###
 
-maintainer-clean:
+.PHONY: maintainer-clean
+maintainer-clean: distclean
 	@echo 'This command is intended for maintainers to use; it'
 	@echo 'deletes files that may need special tools to rebuild.'
-	${MAKE} distclean
 
+.PHONY: install-dep
 install-dep:
 ### PLACEHOLDER ###
 
+.PHONY: install
 install: install-dep
 
+.PHONY: uninstall
 uninstall:
 ### PLACEHOLDER ###
 
+.PHONY: uninstalltest
 uninstalltest:
 ### PLACEHOLDER ###
 
+.PHONY: installtest
 installtest:
 ### PLACEHOLDER ###
 
+.PHONY: test
 test:
 ### PLACEHOLDER ###
