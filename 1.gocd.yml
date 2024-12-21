@@ -3,9 +3,9 @@ environments:
     environments:
       GIT_USER: "{{SECRET:[github][username]}}"
     pipelines:
-      - gocd-agent-docker-v24.3.0
+      - gocd-agent-docker-v24.5.0
 pipelines:
-  gocd-agent-docker-v24.3.0:
+  gocd-agent-docker-v24.5.0:
     group: docker_image
     locking: off
     timer:
@@ -33,7 +33,7 @@ pipelines:
       TEST_ARGS: ''
       COMMIT_TAG: GO_REVISION_GOCD_AGENT_DOCKER_GIT
       DEFAULT_TAG: latest
-      EXTRA_TAG: v24.3.0
+      EXTRA_TAG: v24.5.0
       SRC_DIRECTORY: gocd-agent-docker
       TEST_DIRECTORY: gocd-agent-docker
       PUSH_DIRECTORY: publish-docker-scripts
