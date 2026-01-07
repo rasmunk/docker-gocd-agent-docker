@@ -30,11 +30,12 @@ pipelines:
     parameters:
       IMAGE: docker-gocd-agent-docker
       BUILD_ARGS: '--no-cache'
+      SRC_DIRECTORY: gocd-agent-docker
+      TEST_DIRECTORY: gocd-agent-docker
       TEST_ARGS: ''
+      TEST_MAKE_TARGET: test
+      PUSH_DIRECTORY: publish-docker-scripts
       COMMIT_TAG: GO_REVISION_GOCD_AGENT_DOCKER_GIT
       DEFAULT_TAG: latest
       EXTRA_TAG: v25.3.0
-      SRC_DIRECTORY: gocd-agent-docker
-      TEST_DIRECTORY: gocd-agent-docker
-      PUSH_DIRECTORY: publish-docker-scripts
     template: docker_image
