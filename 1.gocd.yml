@@ -29,11 +29,12 @@ pipelines:
         destination: publish-docker-scripts
     parameters:
       IMAGE: docker-gocd-agent-docker
-      BUILD_ARGS: '--no-cache'
       SRC_DIRECTORY: gocd-agent-docker
+      BUILD_MAKE_TARGET: dockerbuild
+      BUILD_MAKE_ARGS: '--no-cache'
       TEST_DIRECTORY: gocd-agent-docker
-      TEST_ARGS: ''
       TEST_MAKE_TARGET: test
+      TEST_MAKE_ARGS: ''
       PUSH_DIRECTORY: publish-docker-scripts
       COMMIT_TAG: GO_REVISION_GOCD_AGENT_DOCKER_GIT
       DEFAULT_TAG: latest
