@@ -1,4 +1,4 @@
-FROM gocd/gocd-agent-debian-12:v25.4.0
+FROM gocd/gocd-agent-debian-12:v26.1.0
 LABEL MAINTAINER="Rasmus Munk <rasmus.munk@nbi.ku.dk>"
 
 USER root
