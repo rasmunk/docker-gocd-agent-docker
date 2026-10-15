@@ -3,9 +3,9 @@ environments:
     environments:
       GIT_USER: "{{SECRET:[github][username]}}"
     pipelines:
-      - gocd-agent-docker-v25.4.0
+      - gocd-agent-docker
 pipelines:
-  gocd-agent-docker-v25.4.0:
+  gocd-agent-docker:
     group: docker_image
     locking: off
     timer:
